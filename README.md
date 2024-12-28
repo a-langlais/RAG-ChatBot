@@ -5,10 +5,10 @@ Le chatbot utilise des documents comme source de connaissance et récupère des 
 
 ## Fonctionnalités
 
-* Traitement de documents : Gestion des documents pour le chatbot.
-* Indexation par embeddings : Indexation des documents pour une récupération efficace.
-* Chaîne RAG : Intégration de la récupération et de la génération pour créer des réponses.
-* Interface Streamlit : Application web simple pour interagir avec le chatbot.
+* *Traitement de documents* : Gestion des documents pour le chatbot.
+* *Indexation par embeddings* : Indexation des documents pour une récupération efficace.
+* *Chaîne RAG* : Intégration de la récupération et de la génération pour créer des réponses.
+* *Interface Streamlit* : Application web simple pour interagir avec le chatbot.
 
 ## Fichiers
 
