@@ -5,10 +5,10 @@ Le chatbot utilise des documents comme source de connaissance et récupère des 
 
 ## Fonctionnalités
 
-* *Traitement de documents* : Gestion des documents pour le chatbot.
-* *Indexation par embeddings* : Indexation des documents pour une récupération efficace.
-* *Chaîne RAG* : Intégration de la récupération et de la génération pour créer des réponses.
-* *Interface Streamlit* : Application web simple pour interagir avec le chatbot.
+* **Traitement de documents** : Gestion des documents pour le chatbot.
+* **Indexation par embeddings** : Indexation des documents pour une récupération efficace.
+* **Chaîne RAG** : Intégration de la récupération et de la génération pour créer des réponses.
+* **Interface Streamlit** : Application web simple pour interagir avec le chatbot.
 
 ## Fichiers
 
@@ -34,6 +34,7 @@ pip install -r requirements.txt
 ```
 
 Veillez à configurer les variables d'environnement nécessaires en modifiant le fichier .env avec votre/vos clés API.
+Veillez à noter par ailleurs que ce projet fonctionne en local seulement sur Linux et MacOS. Dans le cas d'une utilisation sur Windows, utilisez *a minima* une machine virtuelle WSL.
 
 ## Utilisation
 
