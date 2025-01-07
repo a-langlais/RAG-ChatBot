@@ -1,56 +1,65 @@
-# RAG-ChatBot
+# PDF RAG Chatbot Personnel
 
-Ce dépôt implémente un modèle de génération augmentée par récupération (RAG) pour construire un chatbot interactif personnel. 
-Le chatbot utilise des documents comme source de connaissance et récupère des informations pertinentes pour générer des réponses précises grâce à un ou plusieurs LLM(s) via leur clé API.
+## Description
+
+Ce projet implémente un chatbot personnalisé utilisant un modèle de question-réponse (QA) basé sur la recherche augmentée par des documents (RAG). Le chatbot explore un ou plusieurs fichier(s) PDF pour répondre aux questions de l'utilisateur en s'appuyant sur un VectorStore FAISS pour récupérer les informations pertinentes. Il utilise également un modèle LLM open-source depuis Hugging Face pour le traitement du langage naturel.
 
 ## Fonctionnalités
 
-* **Traitement de documents** : Gestion des documents pour le chatbot.
-* **Indexation par embeddings** : Indexation des documents pour une récupération efficace.
-* **Chaîne RAG** : Intégration de la récupération et de la génération pour créer des réponses.
-* **Interface Streamlit** : Application web simple pour interagir avec le chatbot.
+* **Interface Streamlit** : Interface utilisateur simple et interactive pour poser des questions.
+* **Chargement de PDF** : Les documents PDF sont chargés depuis un répertoire local pour être utilisés comme contexte pour le chatbot.
+* **VectorStore FAISS** : Création et gestion d'un VectorStore pour l'indexation et la recherche rapide dans les documents.
+* **Utilisation de modèles Hugging Face** : Chargement d'un modèle Hugging Face pour l'embedding et le traitement des requêtes.
+* **Personnalisation des prompts** : Possibilité de définir un prompt personnalisé pour répondre aux questions de manière détaillée.
 
 ## Fichiers
 
-```
+```bash
 RAG-ChatBot/
 │
-├── chatbot.py            # Logique principale du chatbot
-├── document_processor.py # Traitement et chargement des documents
-├── embedding_indexer.py  # Indexation des documents avec des embeddings
-├── rag_chain.py          # Connexion entre la récupération et la génération
-├── requirements.txt      # Dépendances Python
-└── streamlit_app.py      # UI Streamlit
+├── data                    # Dossier local contenant les PDF servant de ressources
+├── vectorestore            # Dossier contenant le VectorStore FAISS
+├── vectorstore_utility.py  # Ensemble de fonctions pour le traitement des PDF et la création de la BDD
+├── rag_chatbot.py          # UI de l'application (streamlit)
+├── requirements.txt        # Dépendances Python
+├── .env                    # Variable d'environnement (pensez à rajouter votre API Hugging-Face)
+├── .gitignore              # Fichier pour ignorer les fichiers inutiles dans Git
+└── README.md               # Documentation
 ```
 
-## Installation
+## Démarrer avec ce projet
+### Installation
 
-Clonez le dépôt et installez les dépendances :
+Dans un premier temps, clonez le dépôt GitHub sur votre machine :
 
 ```bash
 git clone https://github.com/a-langlais/RAG-ChatBot.git
-cd RAG-ChatBot
+```
+
+Puis installez les dépendances (préferez la création d'un environnement virtuel avant) :
+
+```bash
 pip install -r requirements.txt
 ```
 
-Veillez à configurer les variables d'environnement nécessaires en modifiant le fichier .env avec votre/vos clés API.
-Veillez à noter par ailleurs que ce projet fonctionne en local seulement sur Linux et MacOS. Dans le cas d'une utilisation sur Windows, utilisez *a minima* une machine virtuelle WSL.
-
-## Utilisation
-
-Pour lancer le chatbot avec l'application Streamlit :
+Veillez à renommer le fichier `.env.example` en `.env` puis l'éditer avec votre token Hugging-Face :
 
 ```bash
-streamlit run streamlit_app.py
+HUGGINGFACE_TOKEN="votre_token_HF"
 ```
 
-## Personnalisation
+Pour générer un token Hugging Face, rendez-vous sur Hugging Face, connectez-vous à votre compte puis accèdez à la section Settings > Access Tokens. 
+Cliquez sur "New token", choisissez les autorisations souhaitées (READ pour simplement accéder aux modèles), et copiez le token généré pour l'utiliser dans ce projet.
 
-* Ajoutez vos propres documents à traiter par le chatbot (format *.txt).
-* Modifiez les fichiers `embedding_indexer.py` et `rag_chain.py` pour ajuster l'interaction avec les documents et la génération des réponses.
+### Utilisation
 
-## Licence
+Mettez tous les fichiers PDF que vous souhaitez explorer dans le dossier `/data`.
+Puis, pour lancer le chatbot avec l'application Streamlit :
 
-Ce projet est sous licence MIT.
+```python
+streamlit run rag_chatbot.py
+```
 
-
+Une fois le premier prompt lancé, l'application alimentera le VectorStore FAISS avec les PDF du dossier `/data`.
+Veillez à être clair et détaillé dans les questions pour que le modèle puisse apporter des réponses.
+Il est possible d'utiliser des modèles plus performants si vos capacités computationnelles suivent. Les modifications peuvent être directement apportées à `vectorestore_utility.py` et `rag_chatbot.py`.
